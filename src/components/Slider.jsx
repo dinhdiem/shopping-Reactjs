@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import { ArrowLeftOutlined, ArrowRightOutlined } from "@material-ui/icons";
 import { sliderItems } from "../data";
 
 const Container = styled.div`
   width: 100%;
-  height: 100vh;
+  height: 90vh;
   display: flex;
   position: relative;
   overflow: hidden;
@@ -39,7 +39,7 @@ const Wrapper = styled.div`
 
 const Slide = styled.div`
   width: 100vw;
-  height: 100vh;
+  height: 90vh;
   display: flex;
   align-items: center;
   background-color: #${(item) => item.bg};
@@ -80,9 +80,7 @@ const Button = styled.button`
 
 const Slider = () => {
   const [slideItem, setSlideItem] = useState(0);
-  //   useEffect(() => {
-  //     const data = sliderItems.find()
-  //   },[]);
+
   const hanlerClick = (direction) => {
     if (direction === "left") {
       setSlideItem(slideItem > 0 ? slideItem - 1 : 2);
@@ -93,12 +91,12 @@ const Slider = () => {
   return (
     <Container>
       <Arrow direction="left" onClick={() => hanlerClick("left")}>
-        <ArrowLeftOutlined />
+        <ArrowLeftOutlined style={{ fontSize: 40 }} />
       </Arrow>
       <Wrapper slideItem={slideItem}>
         {sliderItems.map((item) => {
           return (
-            <Slide bg={item.bg}>
+            <Slide key={item.id} bg={item.bg}>
               <ImageContainer>
                 <Image src={item.img} />
                 <InfoContainer>
@@ -112,7 +110,7 @@ const Slider = () => {
         })}
       </Wrapper>
       <Arrow direction="right" onClick={() => hanlerClick("right")}>
-        <ArrowRightOutlined />
+        <ArrowRightOutlined style={{ fontSize: 40 }} />
       </Arrow>
     </Container>
   );
